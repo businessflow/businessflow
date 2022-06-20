@@ -1,5 +1,6 @@
 interface Flow {
   name: string;
+  description?: string;
   run: (ctx: Context) => Promise<void>;
 }
 
