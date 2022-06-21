@@ -14,17 +14,33 @@ interface Context {
 }
 
 interface Loading {
-  start: () => Promise<void>;
+  start: (items?: number) => Promise<void>;
   complete: () => Promise<void>;
-  completeOne: () => Promise<void>;
+  completeNext: () => Promise<void>;
 }
 
 interface Input {
-  file: (props: { label: string; placeholder?: string }) => Promise<string>;
   text: (props: { label: string; placeholder?: string }) => Promise<string>;
   number: (props: { label: string; placeholder?: string }) => Promise<number>;
   boolean: (props: { label: string; placeholder?: string }) => Promise<boolean>;
+  file: (props: { label: string; placeholder?: string }) => Promise<string>;
+  date: (props: { label: string; placeholder?: string }) => Promise<Date>;
+  dateRange: (props: {
+    label: string;
+    placeholder?: string;
+  }) => Promise<[Date, Date]>;
+  slider: (props: { label: string; placeholder?: string }) => Promise<number>;
+  sliderRange: (props: {
+    label: string;
+    placeholder?: string;
+  }) => Promise<[number, number]>;
   select: (props: {
+    label: string;
+    placeholder?: string;
+    multiple: boolean;
+    options: { key: string; label: string }[];
+  }) => Promise<string>;
+  table: (props: {
     label: string;
     placeholder?: string;
     multiple: boolean;

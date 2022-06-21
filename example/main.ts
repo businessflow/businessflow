@@ -4,8 +4,17 @@ const run = async (ctx: Context) => {
   // Get Name
   const name = await ctx.input.text({
     label: "Name",
-    placeholder: "John Doe",
+    placeholder: "Doe",
   });
+  ctx.log("name");
+  ctx.log(name);
+
+  const firstName = await ctx.input.text({
+    label: "First name",
+    placeholder: "John",
+  });
+  ctx.log("firstName");
+  ctx.log(firstName);
 
   // Get team
   const team = await ctx.input.search({
@@ -15,6 +24,7 @@ const run = async (ctx: Context) => {
       return [{ key: "", label: "" }];
     },
   });
+  ctx.log(team);
 
   // Create db entry
   await ctx.loading.start();
