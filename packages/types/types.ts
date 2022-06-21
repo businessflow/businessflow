@@ -1,3 +1,5 @@
+import { TextProps } from "./messaging";
+
 interface Flow {
   name: string;
   description?: string;
@@ -20,7 +22,7 @@ interface Loading {
 }
 
 interface Input {
-  text: (props: { label: string; placeholder?: string }) => Promise<string>;
+  text: (props: TextProps) => Promise<string>;
   number: (props: { label: string; placeholder?: string }) => Promise<number>;
   boolean: (props: { label: string; placeholder?: string }) => Promise<boolean>;
   file: (props: { label: string; placeholder?: string }) => Promise<string>;
@@ -60,4 +62,4 @@ interface Output {
   download: (url: string) => Promise<void>;
 }
 
-export { Flow, Context };
+export type { Flow, Context };

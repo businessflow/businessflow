@@ -1,50 +1,15 @@
 import { v4 as uuid } from "uuid";
 import { WebSocket } from "ws";
 
-import { Context, Flow } from "./types";
-
-type LoadingOutgoingMessage = {
-  action: "start" | "complete" | "completeNext";
-  items?: number;
-  __typeName: "LoadingStateChange";
-};
-
-type InputRequestOutgoingMessage = {
-  type:
-    | "string"
-    | "number"
-    | "boolean"
-    | "select"
-    | "table"
-    | "search"
-    | "file";
-  props: Record<string, unknown>;
-  __typeName: "RequestForInput";
-};
-
-type CompletionOutgoingMessage = {
-  success: boolean;
-  __typeName: "CompletionOutgoingMessage";
-};
-
-type OutgoingMessage =
-  | LoadingOutgoingMessage
-  | InputRequestOutgoingMessage
-  | CompletionOutgoingMessage;
-
-type BooleanInputResponse = {
-  returnId: string;
-  value: boolean;
-  __typeName: "BooleanInputResponse";
-};
-
-type StringInputResponse = {
-  returnId: string;
-  value: string;
-  __typeName: "StringInputResponse";
-};
-
-type Response = BooleanInputResponse | StringInputResponse;
+import {
+  CompletionOutgoingMessage,
+  Context,
+  Flow,
+  InputRequestOutgoingMessage,
+  LoadingOutgoingMessage,
+  OutgoingMessage,
+  Response,
+} from "@businessflow/types";
 
 async function runFlow(flow: Flow, ws: WebSocket) {
   const transactionId = uuid();
@@ -82,53 +47,50 @@ async function runFlow(flow: Flow, ws: WebSocket) {
     },
     input: {
       async text(props) {
+        const returnId = uuid();
         const msg: InputRequestOutgoingMessage = {
+          returnId,
           props,
-          type: "string",
-          __typeName: "RequestForInput",
+          type: "text",
+          __typeName: "InputRequest",
         };
-        const data = await waitForResponse(msg, ws);
+        const data = await waitForResponse(msg, ws, returnId);
         if (typeof data.value !== "string") {
           throw new Error("Expected string as value");
         }
         return data.value;
       },
       async boolean(props) {
-        const msg: InputRequestOutgoingMessage = {
-          props,
-          type: "boolean",
-          __typeName: "RequestForInput",
-        };
-        const data = await waitForResponse(msg, ws);
-        if (typeof data.value !== "boolean") {
-          throw new Error("Expected boolean as value");
-        }
-        return data.value;
+        return false;
       },
       async number(props) {
+        const returnId = uuid();
         const msg: InputRequestOutgoingMessage = {
+          returnId,
           props,
           type: "number",
-          __typeName: "RequestForInput",
+          __typeName: "InputRequest",
         };
-        const data = await waitForResponse(msg, ws);
+        const data = await waitForResponse(msg, ws, returnId);
         if (typeof data.value !== "number") {
-          throw new Error("Expected boolean as value");
+          throw new Error("Expected string as value");
         }
         return data.value;
       },
+      async date(props) {
+        return new Date();
+      },
+      async dateRange(props) {
+        return [new Date(), new Date()];
+      },
+      async slider(props) {
+        return -1;
+      },
+      async sliderRange(props) {
+        return [-1, -1];
+      },
       async select(props) {
-        const msg: InputRequestOutgoingMessage = {
-          props,
-          type: "select",
-          __typeName: "RequestForInput",
-        };
-        const data = await waitForResponse(msg, ws);
-        if (typeof data.value !== "string") {
-          throw new Error("Expected string as value");
-        }
-
-        return data.value;
+        return "";
       },
       async table(props) {
         return "";
@@ -158,9 +120,12 @@ async function runFlow(flow: Flow, ws: WebSocket) {
   await waitForResponse(msg, ws);
 }
 
-function waitForResponse(msg: OutgoingMessage, ws: WebSocket) {
+function waitForResponse(
+  msg: OutgoingMessage,
+  ws: WebSocket,
+  returnId = uuid()
+) {
   return new Promise<Response>((resolve, reject) => {
-    const returnId = uuid();
     const onMessage = ({ data: rawData }: any) => {
       const data: Response = JSON.parse(rawData);
       if (data.returnId === returnId) {

@@ -1,24 +1,23 @@
 {
-  "name": "businessflow",
+  "name": "@businessflow/mono",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "example": "example"
-  },
-  "bin": "./bin/cli.js",
+  "description": "The BusinessFlow mono repo.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "develop": "turbo run develop"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "uuid": "^8.3.2",
-    "ws": "^8.8.0"
+  "homepage": "https://github.com/businessflow/businessflow#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/businessflow/businessflow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/businessflow/businessflow/issues"
   },
   "devDependencies": {
-    "@types/uuid": "^8.3.4",
-    "@types/ws": "^8.5.3"
+    "turbo": "^1.2.16"
   }
 }

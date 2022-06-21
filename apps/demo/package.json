@@ -1,0 +1,16 @@
+{
+  "name": "@businessflow/demo",
+  "version": "1.0.0",
+  "scripts": {
+    "develop": "nodemon main.ts",
+    "start": "node ./build/main.js",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@businessflow/sdk": "*"
+  },
+  "devDependencies": {
+    "@businessflow/types": "*",
+    "nodemon": "^2.0.16"
+  }
+}

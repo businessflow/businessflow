@@ -1,0 +1,61 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "scripts": {
+    "develop": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@businessflow/types": "*",
+    "@mantine/core": "^4.2.10",
+    "@mantine/dates": "^4.2.10",
+    "@mantine/form": "^4.2.10",
+    "@mantine/hooks": "^4.2.10",
+    "@mantine/modals": "^4.2.10",
+    "@mantine/next": "^4.2.10",
+    "@mantine/notifications": "^4.2.10",
+    "@mantine/prism": "^4.2.10",
+    "@mantine/rte": "^4.2.10",
+    "@mantine/spotlight": "^4.2.10",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.41",
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5",
+    "dayjs": "^1.11.3",
+    "immer": "^9.0.15",
+    "modern-normalize": "^1.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.1",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "tabler-icons-react": "^1.50.0",
+    "typescript": "^4.7.4",
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.0.0-rc.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:8080"
+}
