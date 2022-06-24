@@ -1,8 +1,9 @@
 import { ReactNode, useEffect, useState } from "react";
 
-import { OutgoingMessage, Response } from "@businessflow/types";
+import { OutgoingMessage, InputResponse } from "@businessflow/types";
 import Text from "../form/Text";
 import Number from "../form/Number";
+import File from "../form/File";
 
 type Step = {
   id: string;
@@ -33,7 +34,7 @@ function handleMessage(
   setSteps: React.Dispatch<React.SetStateAction<Step[]>>,
   setLoading: React.Dispatch<React.SetStateAction<number>>
 ) {
-  return new Promise<Response>((resolve, reject) => {
+  return new Promise<InputResponse>((resolve, reject) => {
     if (msg.__typeName === "InputRequest") {
       let step: Step | null = null;
 
@@ -51,6 +52,20 @@ function handleMessage(
           id: msg.returnId,
           element: (
             <Number
+              returnId={msg.returnId}
+              onContinue={resolve}
+              {...msg.props}
+            />
+          ),
+        };
+      }
+
+      if (msg.type === "file") {
+        step = {
+          id: msg.returnId,
+          element: (
+            <File
+              type="png"
               returnId={msg.returnId}
               onContinue={resolve}
               {...msg.props}

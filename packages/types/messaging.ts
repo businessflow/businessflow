@@ -1,8 +1,4 @@
-type TextProps = {
-  label: string;
-  placeholder?: string;
-  required?: boolean;
-};
+import { TextProps } from "./input/text";
 
 type LoadingOutgoingMessage = {
   action: "start" | "complete" | "completeNext";
@@ -10,47 +6,47 @@ type LoadingOutgoingMessage = {
   __typeName: "LoadingStateChange";
 };
 
-type InputRequest = {
+type InputRequestBase = {
   returnId: string;
   __typeName: "InputRequest";
 };
 
-type TextInput = InputRequest & {
+type TextInput = InputRequestBase & {
   type: "text";
   props: TextProps;
 };
 
-type NumberInput = InputRequest & {
+type NumberInput = InputRequestBase & {
   type: "number";
   props: TextProps;
 };
 
-type BooleanInput = InputRequest & {
+type BooleanInput = InputRequestBase & {
   type: "boolean";
   props: TextProps;
 };
 
-type SelectInput = InputRequest & {
+type SelectInput = InputRequestBase & {
   type: "select";
   props: TextProps;
 };
 
-type TableInput = InputRequest & {
+type TableInput = InputRequestBase & {
   type: "table";
   props: TextProps;
 };
 
-type SearchInput = InputRequest & {
+type SearchInput = InputRequestBase & {
   type: "search";
   props: TextProps;
 };
 
-type FileInput = InputRequest & {
+type FileInput = InputRequestBase & {
   type: "file";
   props: TextProps;
 };
 
-type InputRequestOutgoingMessage =
+type InputRequest =
   | TextInput
   | NumberInput
   | BooleanInput
@@ -65,38 +61,50 @@ type CompletionOutgoingMessage = {
 };
 
 type OutgoingMessage =
+  | InputRequest
   | LoadingOutgoingMessage
-  | InputRequestOutgoingMessage
   | CompletionOutgoingMessage;
 
-type BooleanInputResponse = {
+// Response
+type InputResponseBase = {
   returnId: string;
-  value: boolean;
-  __typeName: "BooleanInputResponse";
+  __typeName: "InputResponse";
 };
 
-type StringInputResponse = {
-  returnId: string;
-  value: string;
-  __typeName: "StringInputResponse";
+type TextResponse = InputResponseBase & {
+  value?: string;
+  type: "text";
 };
 
-type NumberInputResponse = {
-  returnId: string;
+type NumberResponse = InputResponseBase & {
   value?: number;
-  __typeName: "NumberInputResponse";
+  type: "number";
 };
 
-type Response =
-  | BooleanInputResponse
-  | StringInputResponse
-  | NumberInputResponse;
+type BooleanResponse = InputResponseBase & {
+  value?: boolean;
+  type: "boolean";
+};
+
+type FileResponse = InputResponseBase & {
+  value?: string;
+  type: "file";
+};
+
+type InputResponse =
+  | TextResponse
+  | NumberResponse
+  | BooleanResponse
+  | FileResponse;
 
 export type {
-  Response,
+  InputResponse,
+  InputRequest,
   OutgoingMessage,
   LoadingOutgoingMessage,
-  InputRequestOutgoingMessage,
   CompletionOutgoingMessage,
-  TextProps,
+  TextInput,
+  NumberInput,
+  BooleanInput,
+  FileInput,
 };

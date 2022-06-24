@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { Button, Group, Stack, TextInput } from "@mantine/core";
+import { useEffect, useRef } from "react";
+import { Stack, TextInput } from "@mantine/core";
+import { OptionalTextProps, RequiredTextProps } from "@businessflow/types";
 
-import { TextProps } from "@businessflow/types";
 import ElementProps from "./ElementProps";
+import Actions from "./Actions";
+import useInput from "./useInput";
 
 function Text({
   label,
@@ -10,8 +12,8 @@ function Text({
   required,
   onContinue,
   returnId,
-}: TextProps & ElementProps) {
-  const [value, setValue] = useState("");
+}: (OptionalTextProps | RequiredTextProps) & ElementProps) {
+  const { value, setValue, isComplete, setComplete } = useInput<string>("");
   const el = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -20,8 +22,10 @@ function Text({
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setComplete(true);
     onContinue({
-      __typeName: "StringInputResponse",
+      __typeName: "InputResponse",
+      type: "text",
       returnId,
       value,
     });
@@ -31,23 +35,18 @@ function Text({
     <form onSubmit={onSubmit}>
       <Stack>
         <TextInput
-          placeholder={placeholder ?? label}
+          ref={el}
           label={label}
+          placeholder={placeholder ?? label}
+          disabled={isComplete}
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          ref={el}
-          required
         />
-        <Group>
-          <Button color="dark" type="submit" disabled={required && !value}>
-            Continue
-          </Button>
-          {!required && (
-            <Button color="gray" variant="light">
-              Skip
-            </Button>
-          )}
-        </Group>
+        <Actions
+          value={value}
+          isComplete={isComplete}
+          isRequired={required ?? false}
+        />
       </Stack>
     </form>
   );

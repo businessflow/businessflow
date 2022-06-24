@@ -18,6 +18,11 @@ const run = async (ctx: Context) => {
   ctx.log("firstName");
   ctx.log(firstName);
 
+  const profileImage = await ctx.input.file({
+    label: "Profile Picture",
+    multiple: true,
+  });
+
   const age = await ctx.input.number({
     label: "Age",
     placeholder: "21",
@@ -26,14 +31,15 @@ const run = async (ctx: Context) => {
   console.log(age);
 
   // Get team
-  const team = await ctx.input.search({
-    label: "Team",
-    allowOther: true,
-    async onSearch(value) {
-      return [{ key: "", label: "" }];
-    },
-  });
-  ctx.log(team);
+  // const team = await ctx.input.search({
+  //   label: "Team",
+  //   allowOther: true,
+  //   async onSearch(value) {
+  //     return [{ key: "", label: "" }];
+  //   },
+  // });
+  // ctx.log(team);
+  const team = "none";
 
   // Create db entry
   await ctx.loading.start();
@@ -52,26 +58,34 @@ const run = async (ctx: Context) => {
 
 const signUp: Flow = {
   name: "Sign-up User",
+  permission: "users.create",
+  emoji: "📚",
   description:
-    "A small example of what BusinessFlow can do in combination with Prisma. 📚",
+    "A small example of what BusinessFlow can do in combination with Prisma.",
   run,
 };
 
 const deleteUser: Flow = {
   name: "Delete User",
-  description: "Run this dangerous Flow to delete a user. 🚨",
-  run,
-};
-
-const createTeam: Flow = {
-  name: "Create Team",
-  description: "To create a new team use this nifty flow. 💡",
+  permission: "users.delete",
+  emoji: "🚨",
+  description: "Run this dangerous Flow to delete a user.",
   run,
 };
 
 const getUsers: Flow = {
   name: "List all Users",
-  description: "This is a handy flow to show all Users. 🧰",
+  permission: "users.list",
+  emoji: "🧰",
+  description: "This is a handy flow to show all Users.",
+  run,
+};
+
+const createTeam: Flow = {
+  name: "Create Team",
+  permission: "team.create",
+  emoji: "💡",
+  description: "To create a new team use this nifty flow.",
   run,
 };
 

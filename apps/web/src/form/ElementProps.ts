@@ -1,8 +1,8 @@
-import { Response } from "@businessflow/types";
+import { InputResponse } from "@businessflow/types";
 
 type ElementProps = {
   returnId: string;
-  onContinue: (response: Response) => void;
+  onContinue: (response: InputResponse) => void;
 };
 
 export default ElementProps;

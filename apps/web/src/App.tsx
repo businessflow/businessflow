@@ -6,6 +6,7 @@ import Shell from "./layout/Shell";
 
 import FlowPage from "./pages/Flow";
 import FlowsPage from "./pages/Flows";
+import LoginPage from "./pages/Login";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,6 +30,7 @@ function App() {
           }
         >
           <Routes>
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/flow/:flowName" element={<FlowPage />} />
             <Route path="/" element={<Shell />}>
               <Route path="/" element={<FlowsPage />} />

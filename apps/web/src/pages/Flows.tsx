@@ -10,7 +10,9 @@ function FlowsPage() {
     <Card shadow="sm" p="lg" key={flowName}>
       <Stack className="h-full">
         <div>
-          <h2>{flow.name}</h2>
+          <h2>
+            {flow.emoji} {flow.name}
+          </h2>
           <p>{flow.description}</p>
         </div>
 

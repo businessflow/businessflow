@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = ".generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Transaction {
+  id String @id
+}
+
+model User {
+  id String @id
+}
+
+model Group {
+  id          String               @id
+  permissions PermissionsOnGroup[]
+}
+
+model Permission {
+  name   String               @id
+  groups PermissionsOnGroup[]
+}
+
+model PermissionsOnGroup {
+  group          Group      @relation(fields: [groupId], references: [id])
+  groupId        String
+  permission     Permission @relation(fields: [permissionName], references: [name])
+  permissionName String
+
+  @@id([groupId, permissionName])
+}

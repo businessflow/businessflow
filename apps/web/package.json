@@ -11,6 +11,7 @@
     "@businessflow/types": "*",
     "@mantine/core": "^4.2.10",
     "@mantine/dates": "^4.2.10",
+    "@mantine/dropzone": "^4.2.10",
     "@mantine/form": "^4.2.10",
     "@mantine/hooks": "^4.2.10",
     "@mantine/modals": "^4.2.10",

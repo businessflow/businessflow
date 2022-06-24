@@ -20,20 +20,25 @@ function listen(flows: { [key: string]: Flow }) {
     res.json([]);
   });
 
+  app.post("/file", (req, res) => {});
+
   const wss = new WebSocketServer({ noServer: true });
   const server = app.listen(8080, () => {
     console.log("BusinessFlow listening on 0.0.0.0:8080");
   });
 
-  server.on("upgrade", function upgrade(request, socket, head) {
-    const { pathname } = parse(request.url ?? "");
+  server.on("upgrade", function upgrade(req, socket, head) {
+    // TODO: Authenticate
+    // const cookies = cookie.parse(req.headers.cookie ?? "");
+
+    const { pathname } = parse(req.url ?? "");
     const [path, flowName] = pathname!.slice(1).split("/")!;
     if (path !== "transaction" || !flows[flowName]) {
       return void socket.destroy();
     }
 
-    wss.handleUpgrade(request, socket, head, (ws) => {
-      wss.emit("connection", ws, request);
+    wss.handleUpgrade(req, socket, head, (ws) => {
+      wss.emit("connection", ws, req);
       runFlow(flows[flowName], ws);
     });
   });

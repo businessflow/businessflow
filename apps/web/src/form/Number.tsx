@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { Button, Group, NumberInput, Stack } from "@mantine/core";
+import { NumberInput, Stack } from "@mantine/core";
 
-import { TextProps } from "@businessflow/types";
+import { OptionalNumberProps, RequiredNumberProps } from "@businessflow/types";
 import ElementProps from "./ElementProps";
+import Actions from "./Actions";
 
 function Number({
   label,
@@ -10,8 +11,9 @@ function Number({
   required,
   onContinue,
   returnId,
-}: TextProps & ElementProps) {
+}: (OptionalNumberProps | RequiredNumberProps) & ElementProps) {
   const [value, setValue] = useState<number | undefined>(0);
+  const [isComplete, setComplete] = useState(false);
   const el = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -20,8 +22,10 @@ function Number({
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    setComplete(true);
     onContinue({
-      __typeName: "NumberInputResponse",
+      __typeName: "InputResponse",
+      type: "number",
       returnId,
       value,
     });
@@ -38,16 +42,11 @@ function Number({
           ref={el}
           required
         />
-        <Group>
-          <Button color="dark" type="submit" disabled={required && !value}>
-            Continue
-          </Button>
-          {!required && (
-            <Button color="gray" variant="light">
-              Skip
-            </Button>
-          )}
-        </Group>
+        <Actions
+          value={value}
+          isComplete={isComplete}
+          isRequired={required ?? false}
+        />
       </Stack>
     </form>
   );

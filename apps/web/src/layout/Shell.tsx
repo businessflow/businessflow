@@ -1,8 +1,9 @@
-import { AppShell, Box, Center, Loader, Navbar } from "@mantine/core";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
+import { AppShell, Box, Center, Loader, Navbar } from "@mantine/core";
 
 import Brand from "./Brand";
+import FlowList from "./FlowList";
 import MainLinks from "./MainLinks";
 import User from "./User";
 
@@ -27,8 +28,11 @@ function Shell() {
               <Brand />
             </Box>
           </Navbar.Section>
-          <Navbar.Section grow mt="md">
+          <Navbar.Section mt="md">
             <MainLinks />
+          </Navbar.Section>
+          <Navbar.Section grow mt="md">
+            <FlowList />
           </Navbar.Section>
           <Navbar.Section>
             <User />
