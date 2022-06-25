@@ -130,78 +130,7 @@ async function runFlow(flow: Flow, ws: WebSocket) {
       },
     },
     input: new DefaultInput(ws),
-    /*input: {
-      async text(props: OptionalTextProps | RequiredTextProps) {
-        const returnId = uuid();
-        const msg: TextInput = {
-          returnId,
-          props,
-          type: "text",
-          __typeName: "InputRequest",
-        };
-        const value = await waitForResponse(msg, ws, returnId);
-
-        return value;
-      },
-      async boolean(props) {
-        const returnId = uuid();
-        const msg: BooleanInput = {
-          returnId,
-          props,
-          type: "boolean",
-          __typeName: "InputRequest",
-        };
-        const value = await waitForResponse(msg, ws, returnId);
-        return value;
-      },
-      async number(props) {
-        const returnId = uuid();
-        const msg: NumberInput = {
-          returnId,
-          props,
-          type: "number",
-          __typeName: "InputRequest",
-        };
-        const value = await waitForResponse(msg, ws, returnId);
-        return value;
-      },
-      async date(props) {
-        return new Date();
-      },
-      async dateRange(props) {
-        return [new Date(), new Date()];
-      },
-      async slider(props) {
-        return -1;
-      },
-      async sliderRange(props) {
-        return [-1, -1];
-      },
-      async select(props) {
-        return "";
-      },
-      async table(props) {
-        return "";
-      },
-      async search(props) {
-        return "";
-      },
-      async file(
-        props: OptionalFileProps | RequiredFileProps | MultipleFilesProps
-      ) {
-        const returnId = uuid();
-        const msg: InputRequest = {
-          returnId,
-          props,
-          type: "file",
-          __typeName: "InputRequest",
-        };
-        const value = await waitForResponse(msg, ws, returnId);
-        return value;
-        
-      },
-    },
-    */ output: {
+    output: {
       async download(url) {},
       async table(text) {},
       async text(text) {},

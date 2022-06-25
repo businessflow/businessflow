@@ -1,5 +1,4 @@
-import { ActionIcon, createStyles, Group, Text, Tooltip } from "@mantine/core";
-import { Plus } from "tabler-icons-react";
+import { createStyles, Group, Text } from "@mantine/core";
 import useFlows from "../data/useFlows";
 
 const useStyles = createStyles((theme) => ({
@@ -57,11 +56,6 @@ function FlowList() {
         <Text size="xs" weight={500} color="dimmed">
           Flows
         </Text>
-        <Tooltip label="Create collection" withArrow position="right">
-          <ActionIcon variant="default" size={18}>
-            <Plus size={12} />
-          </ActionIcon>
-        </Tooltip>
       </Group>
       <div className={classes.collections}>{collectionLinks}</div>
     </>

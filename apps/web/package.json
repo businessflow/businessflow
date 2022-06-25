@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@businessflow/web",
   "version": "1.0.0",
   "scripts": {
     "develop": "react-scripts start",
@@ -28,6 +28,7 @@
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "dayjs": "^1.11.3",
+    "evt": "^1.11.2",
     "immer": "^9.0.15",
     "modern-normalize": "^1.1.0",
     "react": "^18.2.0",

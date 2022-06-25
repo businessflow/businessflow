@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { WebSocketServer } from "ws";
 import { parse } from "url";
 
@@ -7,6 +8,14 @@ import { runFlow } from "./logic";
 
 function listen(flows: { [key: string]: Flow }) {
   const app = express();
+
+  app.use(
+    cors({
+      origin: "*",
+    })
+  );
+
+  app.get("/session", async (req, res) => {});
 
   app.get("/flows", async (req, res) => {
     res.json(flows);
