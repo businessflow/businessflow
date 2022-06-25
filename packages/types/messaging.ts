@@ -57,6 +57,7 @@ type InputRequest =
 
 type CompletionOutgoingMessage = {
   success: boolean;
+  message?: string;
   __typeName: "CompletionOutgoingMessage";
 };
 

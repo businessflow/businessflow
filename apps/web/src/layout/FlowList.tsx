@@ -1,4 +1,5 @@
 import { createStyles, Group, Text } from "@mantine/core";
+import { Link } from "react-router-dom";
 import useFlows from "../data/useFlows";
 
 const useStyles = createStyles((theme) => ({
@@ -39,22 +40,21 @@ function FlowList() {
   const flows = useFlows();
 
   const collectionLinks = Object.entries(flows).map(([flowName, flow]) => (
-    <a
-      href="/"
-      onClick={(event) => event.preventDefault()}
+    <Link
       key={flowName}
+      to={`/flow/${flowName}`}
       className={classes.collectionLink}
     >
       <span style={{ marginRight: 9, fontSize: 16 }}>{flow.emoji}</span>{" "}
       {flow.name}
-    </a>
+    </Link>
   ));
 
   return (
     <>
       <Group className={classes.collectionsHeader} position="apart">
         <Text size="xs" weight={500} color="dimmed">
-          Flows
+          Flow Shortcuts
         </Text>
       </Group>
       <div className={classes.collections}>{collectionLinks}</div>

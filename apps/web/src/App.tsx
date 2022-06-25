@@ -10,6 +10,7 @@ import Shell from "./layout/Shell";
 import FlowPage from "./pages/Flow";
 import FlowsPage from "./pages/Flows";
 import LoginPage from "./pages/Login";
+import UsersPage from "./pages/Users";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,6 +52,7 @@ function App() {
               }
             >
               <Route path="/" element={<FlowsPage />} />
+              <Route path="/users" element={<UsersPage />} />
               <Route path="/account" element={<AccountPage />} />
               <Route path="*" element={<div>Not found</div>} />
             </Route>

@@ -12,7 +12,7 @@ interface Flow {
   emoji: string;
   permission: string;
   description?: string;
-  run: (ctx: Context) => Promise<void>;
+  run: (ctx: Context) => Promise<string | undefined | void>;
 }
 
 interface Context {

@@ -30,30 +30,7 @@ const run = async (ctx: Context) => {
   ctx.log("age");
   console.log(age);
 
-  // Get team
-  // const team = await ctx.input.search({
-  //   label: "Team",
-  //   allowOther: true,
-  //   async onSearch(value) {
-  //     return [{ key: "", label: "" }];
-  //   },
-  // });
-  // ctx.log(team);
-  const team = "none";
-
-  // Create db entry
-  await ctx.loading.start();
-  // prisma.user.create()
-  await ctx.loading.complete();
-
-  // Notify team
-  await ctx.notify({
-    title: "New user",
-    description: `A new user named ${name} signed up for team ${team}.`,
-  });
-
-  // Show welcome message
-  await ctx.output.text(`Hello ${name}!`);
+  return "User created.";
 };
 
 const signUp: Flow = {

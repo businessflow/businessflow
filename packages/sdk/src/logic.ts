@@ -138,11 +138,12 @@ async function runFlow(flow: Flow, ws: WebSocket) {
   };
 
   // Run flow
-  await flow.run(ctx);
+  const resultMessage = await flow.run(ctx);
 
   // Send completion message
   const msg: CompletionOutgoingMessage = {
     success: true,
+    message: typeof resultMessage === "string" ? resultMessage : undefined,
     __typeName: "CompletionOutgoingMessage",
   };
   await waitForResponse(msg, ws);

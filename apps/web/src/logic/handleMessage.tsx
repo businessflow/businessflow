@@ -1,4 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
+import { Alert } from "@mantine/core";
+import { Check, X } from "tabler-icons-react";
 
 import { OutgoingMessage, InputResponse } from "@businessflow/types";
 import Text from "../form/Text";
@@ -83,6 +85,22 @@ function handleMessage(
       if (msg.action === "start") {
         setLoading(msg.items ?? 1);
       }
+    }
+
+    if (msg.__typeName === "CompletionOutgoingMessage") {
+      const step = {
+        id: "msg.returnId",
+        element: msg.success ? (
+          <Alert title="Success" icon={<Check size={18} />} color="green">
+            {msg.message}
+          </Alert>
+        ) : (
+          <Alert title="Failure" icon={<X size={18} />} color="red">
+            {msg.message}
+          </Alert>
+        ),
+      };
+      setSteps((steps) => [...steps, step!]);
     }
   });
 }
