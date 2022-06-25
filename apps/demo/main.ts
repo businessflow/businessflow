@@ -28,7 +28,7 @@ const run = async (ctx: Context) => {
     placeholder: "21",
   });
   ctx.log("age");
-  console.log(age);
+  ctx.log(age);
 
   return "User created.";
 };
