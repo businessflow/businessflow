@@ -1,3 +1,4 @@
 .turbo/
 node_modules/
 packages/sdk/prisma/.generated/
+.vscode/settings.json

@@ -19,6 +19,6 @@
     "url": "https://github.com/businessflow/businessflow/issues"
   },
   "devDependencies": {
-    "turbo": "^1.2.16"
+    "turbo": "^1.5.3"
   }
 }

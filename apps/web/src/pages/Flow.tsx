@@ -24,7 +24,7 @@ function FlowPage() {
   return (
     <AppShell
       header={
-        <Header height="100%" p="xs">
+        <Header height="60" p="xs">
           <Group position="apart">
             <Brand />
             <Link to="/">
@@ -36,7 +36,7 @@ function FlowPage() {
         </Header>
       }
     >
-      <Container style={{ position: "relative" }}>
+      <Container>
         <LoadingOverlay visible={loading !== 0} />
         <Stack>
           <Title>{flow.name}</Title>

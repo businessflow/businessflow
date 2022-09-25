@@ -38,7 +38,7 @@ function User() {
         >
           <Group>
             <Avatar
-              src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
+              src="https://media-exp1.licdn.com/dms/image/D4D03AQHEqr15R_2eVg/profile-displayphoto-shrink_800_800/0/1664103784673?e=1669852800&v=beta&t=WYcxWqLq9psLkYlKtyuGQ_RpVZoojgAcqywvXRW6J3I"
               radius="xl"
             />
             <Box sx={{ flex: 1 }}>

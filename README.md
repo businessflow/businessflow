@@ -5,6 +5,16 @@ BusinessFlow will create an UI based on your `Flow`. Need a string from the user
 
 ## Example
 
+### Overview
+
+![Overview](.github/screenshots/overflow.png)
+
+### Flow execution
+
+![Flow](.github/screenshots/flow.png)
+
+### Code
+
 BusinessFlow is built on Node.js and TypeScript and is nothing more than a npm package. To build a BusinessFlow App create a TypeScript file (e.g. `main.ts`), install the BusinessFlow SDK and start scripting. You can use any other npm package, like Prisma in the following example:
 
 ```typescript
@@ -66,8 +76,8 @@ BusinessFlow.listen({
 
 Install dependencies:
 
-> npm i
+> npm install
 
 Start development servers:
 
-> npx turbo run develop
+> npm run develop

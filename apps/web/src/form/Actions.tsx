@@ -1,21 +1,25 @@
 import { Button, Group } from "@mantine/core";
 
-function Actions({
+function Actions<T>({
   isRequired,
   isComplete,
   value,
 }: {
   isRequired: boolean;
   isComplete: boolean;
-  value: unknown | undefined | null;
+  value: T | undefined | null;
 }) {
   return !isComplete ? (
     <Group>
-      <Button color="dark" type="submit" disabled={!value}>
+      <Button
+        color="dark"
+        type="submit"
+        disabled={value === undefined || value === null}
+      >
         Continue
       </Button>
-      {!isRequired && !value && (
-        <Button color="gray" variant="light">
+      {!isRequired && (value === undefined || value === null) && (
+        <Button color="blue" variant="light">
           Skip
         </Button>
       )}

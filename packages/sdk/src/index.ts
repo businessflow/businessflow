@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
-import { WebSocketServer } from "ws";
 import { parse } from "url";
+import { WebSocketServer } from "ws";
 
 import { Flow } from "@businessflow/types";
 import { runFlow } from "./logic";
+import withAuth from "./middleware/auth";
 
 function listen(flows: { [key: string]: Flow }) {
   const app = express();
@@ -15,7 +16,10 @@ function listen(flows: { [key: string]: Flow }) {
     })
   );
 
-  app.get("/session", async (req, res) => {});
+  app.get("/session", withAuth, (req, res) => {
+    // TODO
+    res.json((req as any).user);
+  });
 
   app.get("/flows", async (req, res) => {
     res.json(flows);
@@ -29,14 +33,16 @@ function listen(flows: { [key: string]: Flow }) {
     res.json([]);
   });
 
-  app.post("/file", (req, res) => {});
+  app.post("/file", (req, res) => {
+    res.status(200).end();
+  });
 
   const wss = new WebSocketServer({ noServer: true });
   const server = app.listen(8080, () => {
     console.log("BusinessFlow listening on 0.0.0.0:8080");
   });
 
-  server.on("upgrade", function upgrade(req, socket, head) {
+  server.on("upgrade", (req, socket, head) => {
     // TODO: Authenticate
     // const cookies = cookie.parse(req.headers.cookie ?? "");
 

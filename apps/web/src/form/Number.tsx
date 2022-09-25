@@ -12,7 +12,7 @@ function Number({
   onContinue,
   returnId,
 }: (OptionalNumberProps | RequiredNumberProps) & ElementProps) {
-  const [value, setValue] = useState<number | undefined>(0);
+  const [value, setValue] = useState<number | undefined>();
   const [isComplete, setComplete] = useState(false);
   const el = useRef<HTMLInputElement>(null);
 
@@ -41,6 +41,7 @@ function Number({
           onChange={(value) => setValue(value)}
           ref={el}
           required
+          disabled={isComplete}
         />
         <Actions
           value={value}

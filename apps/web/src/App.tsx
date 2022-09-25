@@ -1,7 +1,8 @@
-import { AppShell, Center, Loader } from "@mantine/core";
 import { Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AppShell, Center, Loader } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 
 import AccountPage from "./pages/Account";
 import Protected from "./auth/Protected";
@@ -39,7 +40,9 @@ function App() {
               path="/flow/:flowName"
               element={
                 <Protected>
-                  <FlowPage />
+                  <NotificationsProvider>
+                    <FlowPage />
+                  </NotificationsProvider>
                 </Protected>
               }
             />
