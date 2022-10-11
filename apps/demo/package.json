@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@businessflow/types": "*",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "ts-node": "^10.9.1"
   }
 }
